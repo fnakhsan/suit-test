@@ -36,7 +36,14 @@ class FirstFragment : Fragment() {
 
         binding?.apply {
             btnCheck.setOnClickListener {
-                showDialog(if (isPalindrome(edtPalindrome.text.toString())) R.string.dialog_true else R.string.dialog_false)
+                val palindrome = edtPalindrome.text.toString()
+                if (palindrome.isNotBlank()) {
+                    showDialog(if (isPalindrome(palindrome)) R.string.dialog_true else R.string.dialog_false)
+                }
+                else {
+                    showDialog(R.string.error_palindrome)
+                    edtPalindrome.error = getString(R.string.error_palindrome)
+                }
             }
             btnNext.setOnClickListener {
                 val name = edtName.text.toString()
